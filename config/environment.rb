@@ -10,6 +10,9 @@ Rails::Initializer.run do |config|
   # Required gems
   config.gem "haml"
   config.gem "authlogic"
+  #config.gem "ruby-openid", :lib => "ruby_openid"
+  config.gem "authlogic-oid", :lib => "authlogic_openid"
+  
   
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
