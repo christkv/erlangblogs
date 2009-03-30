@@ -1,0 +1,6 @@
+%h1 Activation Complete
+- if !@user.nil?
+  - form_for @user, :url => activate_path(@user.id), :html => { :method => :post } do |form|
+    = form.error_messages
+    = render :partial => "form", :locals => { :form => form }
+    = form.submit "Activate"

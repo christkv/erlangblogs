@@ -10,8 +10,9 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     @user.save do |result|
       if result
-        flash[:notice] = "Account registered!"
-        redirect_back_or_default account_url
+        @user.deliver_activation_instructions!
+        flash[:notice] = "Your account has been created. Please check your e-mail for your account activation instructions!"
+        render :action => :new
       else
         render :action => :new
       end

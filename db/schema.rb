@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090330132820) do
+ActiveRecord::Schema.define(:version => 20090330143531) do
 
   create_table "open_id_authentication_associations", :force => true do |t|
     t.integer "issued"
@@ -27,17 +27,17 @@ ActiveRecord::Schema.define(:version => 20090330132820) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "firstname",                          :null => false
-    t.string   "lastname",                           :null => false
-    t.string   "email",                              :null => false
+    t.string   "firstname",                              :null => false
+    t.string   "lastname",                               :null => false
+    t.string   "email",                                  :null => false
     t.string   "login"
     t.string   "crypted_password"
     t.string   "password_salt"
-    t.string   "persistence_token",                  :null => false
-    t.string   "single_access_token",                :null => false
-    t.string   "perishable_token",                   :null => false
-    t.integer  "login_count",         :default => 0, :null => false
-    t.integer  "failed_login_count",  :default => 0, :null => false
+    t.string   "persistence_token",                      :null => false
+    t.string   "single_access_token",                    :null => false
+    t.string   "perishable_token",                       :null => false
+    t.integer  "login_count",         :default => 0,     :null => false
+    t.integer  "failed_login_count",  :default => 0,     :null => false
     t.datetime "last_request_at"
     t.datetime "current_login_at"
     t.datetime "last_login_at"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(:version => 20090330132820) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "openid_identifier"
+    t.boolean  "active",              :default => false
   end
 
   add_index "users", ["openid_identifier"], :name => "index_users_on_openid_identifier"
