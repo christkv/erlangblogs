@@ -9,7 +9,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090330143531) do
+ActiveRecord::Schema.define(:version => 20090331094734) do
+
+  create_table "invites", :force => true do |t|
+    t.integer  "user_id",        :null => false
+    t.integer  "user_id_target", :null => false
+    t.text     "message"
+    t.boolean  "is_accepted"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "open_id_authentication_associations", :force => true do |t|
     t.integer "issued"
@@ -47,6 +56,10 @@ ActiveRecord::Schema.define(:version => 20090330143531) do
     t.datetime "updated_at"
     t.string   "openid_identifier"
     t.boolean  "active",              :default => false
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "users", ["openid_identifier"], :name => "index_users_on_openid_identifier"

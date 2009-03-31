@@ -1,7 +1,14 @@
 class UsersController < ApplicationController
   #before_filter :require_no_user, :only => [:new, :create]
   before_filter :require_user, :only => [:show, :edit, :update]
-  
+
+  def avatar
+    # Save the avatar
+    User.update(params[:user][:id], {:avatar => params[:user][:avatar]})
+    # redirect to the account url
+    redirect_to account_url
+  end
+
   def new
     @user = User.new
   end

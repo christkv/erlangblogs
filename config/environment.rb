@@ -10,8 +10,8 @@ Rails::Initializer.run do |config|
   # Required gems
   config.gem "haml"
   config.gem "authlogic"
-  #config.gem "ruby-openid", :lib => "ruby_openid"
   config.gem "authlogic-oid", :lib => "authlogic_openid"
+  config.gem "ferret"
   
   
   # Settings in config/environments/* take precedence over those specified here.
@@ -46,3 +46,5 @@ Rails::Initializer.run do |config|
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
 end
+
+require 'acts_as_ferret'

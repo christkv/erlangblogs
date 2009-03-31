@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: CHANGELOG</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>CHANGELOG</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>vendor/plugins/open_id_authentication/CHANGELOG
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Mon Mar 30 08:41:17 +0200 2009</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <ul>
+<li>Fake HTTP method from <a href="../../../../classes/OpenID.html">OpenID</a>
+server since they only support a GET. Eliminates the need to set an extra
+route to match the server&#8216;s reply. [Josh Peek]
+
+</li>
+<li><a href="../../../../classes/OpenID.html">OpenID</a> 2.0 recommends that
+forms should use the field name &quot;openid_identifier&quot; rather than
+&quot;openid_url&quot; [Josh Peek]
+
+</li>
+<li>Return open_id_response.display_identifier to the application instead of
+.endpoints.claimed_id. [nbibler]
+
+</li>
+<li>Add Timeout protection [Rick]
+
+</li>
+<li>An invalid identity url passed through authenticate_with_open_id will no
+longer raise an InvalidOpenId exception. Instead it will return
+Result[:missing] to the completion block.
+
+</li>
+<li>Allow a return_to option to be used instead of the requested url [Josh
+Peek]
+
+</li>
+<li>Updated plugin to use Ruby <a
+href="../../../../classes/OpenID.html">OpenID</a> 2.x.x [Josh Peek]
+
+</li>
+<li>Tied plugin to ruby-openid 1.1.4 gem until we can make it compatible with
+2.x [DHH]
+
+</li>
+<li>Use URI instead of regexps to normalize the URL and gain free, better
+matching 8136 [dkubb]
+
+</li>
+<li>Allow -&#8217;s in normalize_url [Rick]
+
+</li>
+<li>remove instance of mattr_accessor, it was breaking tests since they
+don&#8216;t load ActiveSupport. Fix Timeout test [Rick]
+
+</li>
+<li>Throw a InvalidOpenId exception instead of just a RuntimeError when the URL
+can&#8216;t be normalized [DHH]
+
+</li>
+<li>Just use the path for the return URL, so extra query parameters don&#8216;t
+interfere [DHH]
+
+</li>
+<li>Added a new default database-backed store after experiencing trouble with
+the filestore on NFS. The file store is still available as an option [DHH]
+
+</li>
+<li>Added normalize_url and applied it to all operations going through the
+plugin [DHH]
+
+</li>
+<li>Removed open_id? as the idea of using the same input box for both <a
+href="../../../../classes/OpenID.html">OpenID</a> and username has died
+&#8212; use using_open_id? instead (which checks for the presence of
+params[:openid_url] by default) [DHH]
+
+</li>
+<li>Added <a
+href="../../../../classes/OpenIdAuthentication/Result.html">OpenIdAuthentication::Result</a>
+to make it easier to deal with default situations where you don&#8216;t
+care to do something particular for each error state [DHH]
+
+</li>
+<li>Stop relying on root_url being defined, we can just grab the current url
+instead [DHH]
+
+</li>
+</ul>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>
