@@ -8,6 +8,8 @@ ActionController::Routing::Routes.draw do |map|
   map.avatar   '/avatar', :controller => 'users', :action => 'avatar'
   map.register '/register/:activation_code', :controller => 'activations', :action => 'new'
   map.activate '/activate/:id', :controller => 'activations', :action => 'create'  
+
+  map.resources :facebook, :collection => {:link_user_accounts => :get}
   
-  map.root :controller => "user_sessions", :action => "new"
+  map.root :controller => "home"
 end

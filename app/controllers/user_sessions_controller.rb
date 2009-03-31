@@ -27,7 +27,12 @@ class UserSessionsController < ApplicationController
   end
   
   def destroy
+    # Destroy current user
     current_user_session.destroy
+    current_user.destroy
+    # Destroy facebook session
+    clear_fb_cookies!
+    # Redirect
     flash[:notice] = "Logout successful!"
     redirect_back_or_default new_user_session_url
   end
