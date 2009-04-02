@@ -28,8 +28,14 @@ class UserSessionsController < ApplicationController
   
   def destroy
     # Destroy current user
-    current_user_session.destroy
-    current_user.destroy
+    begin
+      current_user_session.destroy
+    rescue Exception => e
+    end
+    begin
+      current_user.destroy
+    rescue Exception => e
+    end
     # Destroy facebook session
     clear_fb_cookies!
     # Redirect

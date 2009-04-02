@@ -469,7 +469,6 @@ module Facebooker
           else
             super
           end
-      
           #now create the item
           (publisher=new).send(method,*args)
           case publisher._body

@@ -2,34 +2,18 @@
 %html{:xmlns => "http://www.w3.org/1999/xhtml", "xmlns:fb" => "http://www.facebook.com/2008/fbml"}
   %head
     %meta{"http-equiv" => "content-type", :content => "text/html;charset=UTF-8"}
-    %title
-      = controller.controller_name
-      = controller.action_name
     = javascript_include_tag :defaults
-    = stylesheet_link_tag 'scaffold'
     = fb_connect_javascript_tag
+    = javascript_include_tag "facebook"
     = init_fb_connect "XFBML"
+    = stylesheet_link_tag 'application'
   %body
-    %h1 Authlogic Example App
-    = pluralize User.logged_in.count, "user" 
-    = "currently logged in" 
-    %br
-    %br
-    - if !current_user
-      = link_to "Register", new_account_path 
-      = "|"
-      = link_to "Log In", new_user_session_path 
-      = "|"
-      = "Login with Facebook connect"
-      = fb_login_button('window.location = "/facebook/link_user_accounts";')
-    - else
-      - form_for "user", :url => search_path do |f|
-        = text_field("search", "search")
-        = submit_tag "Search"
-      = "|"
-      = link_to "My Account", account_path
-      = "|"
-      = link_to "Logout", user_session_path, :method => :delete, :confirm => "Are you sure you want to logout?"
-    %p{:style => "color: green"}
-      = flash[:notice]
-    = yield
+    = render :partial => "shared/head"
+    #wrapper
+      #page
+        #sidebar1{:class => "sidebar"}
+        #content
+          = yield
+        #sidebar2{:class => "sidebar"}
+          %div{:style => "clear: both;"}= "&nbsp;"
+    = render :partial => "shared/footer"

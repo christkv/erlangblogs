@@ -1,0 +1,32 @@
+#header
+  #logo
+    %h1
+      %a{:href => "#"}
+        %span Erlang
+        Blogs
+    %p A community site for Erlang developers 
+  #menu
+    %ul{:id => "main"}
+      %li{:class => "current_page_items"}
+        %a{:href => "#"} Homepage
+      %li
+        %a{:href => "#"} Blogs
+      %li
+        %a{:href => "#"} Projects
+      %li
+        %a{:href => "#"}= ""
+      %li
+        %a{:href => "#"}= ""
+      %li
+        %a{:href => "#"}= ""
+      %li
+        %a{:href => "#"}= ""
+      %li
+        %a{:href => "#"}= ""
+      %li
+        %a{:href => "#"}= ""
+    %ul{:id => "feed"}
+      %li
+        %a{:href => "#"} Login
+      %li
+        = fb_login_button('window.location = "/facebook/link_user_accounts";')

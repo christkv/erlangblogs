@@ -12,6 +12,7 @@ Rails::Initializer.run do |config|
   config.gem "authlogic"
   config.gem "authlogic-oid", :lib => "authlogic_openid"
   config.gem "ferret"
+  #config.gem "fiveruns-memcache-client"
   
   
   # Settings in config/environments/* take precedence over those specified here.

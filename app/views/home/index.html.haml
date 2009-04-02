@@ -1,7 +1,14 @@
-Hello world
-- @facebook.methods.sort.each do |m|
-  = m.to_s
-  %br
+= render :partial => "facebook_friends"
+- if @fb_friends
+  %table
+    %tr
+      %th=""
+      %th="First name"
+      %th="Last name"
+    - @fb_friends.each do |friend|
+      %tr
+        %td
+          %img{:src => friend.pic_square}
+        %td= friend.first_name
+        %td= friend.last_name
 
-
-= "#{current_user.inspect}"
