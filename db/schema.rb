@@ -9,7 +9,46 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090401150015) do
+ActiveRecord::Schema.define(:version => 20090406155720) do
+
+  create_table "blog_entries", :force => true do |t|
+    t.integer  "blog_id",        :null => false
+    t.string   "title",          :null => false
+    t.text     "content",        :null => false
+    t.text     "url",            :null => false
+    t.datetime "date_published", :null => false
+    t.text     "metadata"
+    t.string   "hash_value",     :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "blogs", :force => true do |t|
+    t.integer  "user_id",      :null => false
+    t.string   "title",        :null => false
+    t.text     "description",  :null => false
+    t.text     "url",          :null => false
+    t.text     "feed_url",     :null => false
+    t.datetime "last_updated", :null => false
+    t.text     "metadata"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "channels", :force => true do |t|
+    t.string   "title",       :null => false
+    t.text     "description"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "channels_blogs", :force => true do |t|
+    t.integer  "channel_id", :null => false
+    t.integer  "blog_id",    :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "facebook_templates", :force => true do |t|
     t.string "template_name", :null => false
@@ -41,6 +80,48 @@ ActiveRecord::Schema.define(:version => 20090401150015) do
     t.integer "timestamp",  :null => false
     t.string  "server_url"
     t.string  "salt",       :null => false
+  end
+
+  create_table "project_downloads", :force => true do |t|
+    t.integer  "project_id", :null => false
+    t.datetime "updated_at"
+    t.string   "author"
+    t.text     "title"
+    t.text     "url"
+    t.string   "hash_value", :null => false
+    t.datetime "created_at"
+  end
+
+  create_table "project_updates", :force => true do |t|
+    t.integer  "project_id", :null => false
+    t.datetime "updated_at"
+    t.string   "author"
+    t.text     "title"
+    t.text     "url"
+    t.string   "hash_value", :null => false
+    t.datetime "created_at"
+  end
+
+  create_table "projects", :force => true do |t|
+    t.string   "site",        :null => false
+    t.text     "url",         :null => false
+    t.text     "title"
+    t.text     "description"
+    t.string   "hash_value",  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "metadata"
+  end
+
+  create_table "user_platforms", :force => true do |t|
+    t.string   "login",      :null => false
+    t.string   "platform"
+    t.string   "auth_token"
+    t.string   "session"
+    t.string   "email"
+    t.text     "metadata"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|

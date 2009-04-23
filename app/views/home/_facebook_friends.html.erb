@@ -1,0 +1,39 @@
+<script type="text/javascript">
+//<![CDATA[
+    window.onload = function() {
+      facebook_publish_feed_story(67677512105, {"running-picture":"<img src=\"http:\/\/www.somethingtoputhere.com\/therunaround\/images\/runaround_feed.jpg\" \/>","location":"Madrid","distance":"2000 mile"});
+      facebook_onload(true);
+    };
+
+	/*var api_key = 'a037a16fce4447cf026c584bc194b028';
+	var channel_path = 'Relative channel path here';
+  FB_RequireFeatures(["Api"], function(){
+		// Create an ApiClient object, passing app's API key and
+		// a site relative URL to xd_receiver.htm
+		FB.Facebook.init(api_key, channel_path);
+		var api = FB.Facebook.apiClient;
+		// require user to login
+		FB.Connect.requireSession(function(exception){
+			//Debug.dump("Current user id is " + api.get_session().uid);
+			// Get friends list
+			//api.friends_get(null, function(result) {
+				//Debug.dump(result, 'friendsResult from non-batch execution ');
+			//});
+      var user_message_prompt = "What do you think of this book?";
+      var user_message = {value: "write your review here"};
+      var template_data = ["{*actor*} just challenged {*target*} to a game of rochambeau."];
+      var body_general ="Hello";
+      var comment_data = {
+        "verb":'commented on the video ',
+        "noun":'Sample Video',
+        "body":'Here is text for the sample body.',
+        "fullbody":'Here is the sample body text for a full story.',
+        "images":[{'src':'http://www.somethingtoputhere.com/therunaround/images/runaround_image.jpg',
+        "href":'http://www.facebook.com'}]};
+      FB.Connect.showFeedDialog(67671292105, template_data, null, body_general, null, FB.RequireConnect.require, FB.RequireConnect.promptConnect,
+        user_message_prompt, user_message);
+      //FB.Connect.showFeedDialog(67671292105, comment_data);
+		});
+	});*/
+//]]>
+</script>

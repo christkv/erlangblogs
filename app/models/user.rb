@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
                   :conditions => ["is_accepted = ?", true]
 
   # Handles the indexing of the data for the user allowing for search
-  #acts_as_ferret :fields => [:firstname, :lastname, :login, :email]
+  acts_as_ferret :fields => [:firstname, :lastname, :login, :email]
 
   # User has an avatar
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }

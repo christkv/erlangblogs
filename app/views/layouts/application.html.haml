@@ -12,8 +12,10 @@
     #wrapper
       #page
         #sidebar1{:class => "sidebar"}
+          = render :partial => "shared/left_sidebar"
         #content
+          = render :partial => "shared/menubar"
           = yield
         #sidebar2{:class => "sidebar"}
-          %div{:style => "clear: both;"}= "&nbsp;"
+        %div{:style => "clear: both;"}= "&nbsp;"
     = render :partial => "shared/footer"
