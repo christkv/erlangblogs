@@ -15,6 +15,14 @@ class User < ActiveRecord::Base
   # User has an avatar
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }
 
+  # A User follows one or more projects
+  has_and_belongs_to_many :project_follows, :class_name => "Project", :join_table => "project_follows"
+
+  def is_following(user_id, project_id)
+    # Validate presence of the project as a following
+    Project.find_by_sql(["select * from project_follows pf, projects p where pf.user_id = ? and pf.project_id = ? and p.id = pf.project_id", user_id, project_id]).length == 0     
+  end
+
   def signup!(params)
     self.login = params[:user][:login]
     self.email = params[:user][:email]

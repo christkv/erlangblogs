@@ -1,0 +1,4 @@
+- if mode.eql?("follow")
+  = link_to_remote(text, :update => "project_#{project_id}", :url => project_follow_url({:id => project_id}))
+- else
+  = link_to_remote(text, :update => "project_#{project_id}", :url => project_remove_follow_url({:id => project_id}))

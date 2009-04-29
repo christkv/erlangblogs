@@ -1,0 +1,22 @@
+%table
+  %thead
+    %tr
+      %th Name
+      %th Site
+      %th Description
+      %th
+  %tbody
+    - @projects.each do |project|
+      %tr
+        %td
+          = link_to(project.title, project_show_url({:id => project.id}))
+        %td= project.site
+        %td= project.description
+        %td
+          %div{:id => "project_#{project.id}"}
+            - if !current_user.nil?
+              - !if current_user.is_following(current_user.id, project.id)
+                = render :partial => "follow", :locals => {:mode => "follow", :text => "Follow", :project_id => project.id}
+              - else
+                = render :partial => "follow", :locals => {:mode => "remove", :text => "Remove", :project_id => project.id}
+= will_paginate(@projects)

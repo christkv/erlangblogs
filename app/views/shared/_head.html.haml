@@ -12,7 +12,8 @@
       %li
         %a{:href => "#"} Blogs
       %li
-        %a{:href => "#"} Projects
+        %a{:href => "#"}
+          = link_to "Projects", :controller => "project", :action => "index" 
       %li
         %a{:href => "#"}= ""
       %li

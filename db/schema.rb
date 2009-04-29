@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090406155720) do
+ActiveRecord::Schema.define(:version => 20090429143441) do
 
   create_table "blog_entries", :force => true do |t|
     t.integer  "blog_id",        :null => false
@@ -92,6 +92,13 @@ ActiveRecord::Schema.define(:version => 20090406155720) do
     t.datetime "created_at"
   end
 
+  create_table "project_follows", :force => true do |t|
+    t.integer  "project_id", :null => false
+    t.integer  "user_id",    :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "project_updates", :force => true do |t|
     t.integer  "project_id", :null => false
     t.datetime "updated_at"
@@ -120,6 +127,14 @@ ActiveRecord::Schema.define(:version => 20090406155720) do
     t.string   "session"
     t.string   "email"
     t.text     "metadata"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_projects", :force => true do |t|
+    t.integer  "project_id", :null => false
+    t.integer  "user_id",    :null => false
+    t.string   "role",       :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

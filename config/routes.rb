@@ -7,7 +7,11 @@ ActionController::Routing::Routes.draw do |map|
 
   map.avatar   '/avatar', :controller => 'users', :action => 'avatar'
   map.register '/register/:activation_code', :controller => 'activations', :action => 'new'
-  map.activate '/activate/:id', :controller => 'activations', :action => 'create'  
+  map.activate '/activate/:id', :controller => 'activations', :action => 'create'
+  map.project '/project', :controller => 'project', :action => 'index'
+  map.project_show '/project/:id', :controller => 'project', :action => 'show'
+  map.project_follow '/project/follow/:id', :controller => 'project', :action => 'follow'
+  map.project_remove_follow '/project/remove_follow/:id', :controller => 'project', :action => 'remove_follow' 
 
   map.resources :facebook, :collection => {:link_user_accounts => :get}
   
