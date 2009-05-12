@@ -10,7 +10,8 @@
       %li{:class => "current_page_items"}
         %a{:href => "#"} Homepage
       %li
-        %a{:href => "#"} Blogs
+        %a{:href => "#"}
+          = link_to "Blogs", :controller => "blog", :action => "index"
       %li
         %a{:href => "#"}
           = link_to "Projects", :controller => "project", :action => "index" 
@@ -22,11 +23,6 @@
         %a{:href => "#"}= ""
       %li
         %a{:href => "#"}= ""
-      %li
-        %a{:href => "#"}= ""
-      %li
-        %a{:href => "#"}= ""
-    %ul{:id => "feed"}
       %li
         %a{:href => "#"} Login
       %li

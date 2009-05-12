@@ -176,7 +176,8 @@ img.right {
 
 #content {
 	float: left;
-	width: 550px;
+	padding-left: 10px;
+	width: 950px;
 }
 
 .post {

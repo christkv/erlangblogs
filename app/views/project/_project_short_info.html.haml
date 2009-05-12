@@ -1,0 +1,33 @@
+%h2 Project Info
+%table
+  %tr
+    %td{:valign => "top"}
+      %table{:width => "100%"}
+        %tr
+          %td{:colspan => 2}
+            %h3 Project Name
+        %tr
+          %td{:colspan => 2}= project.title
+        %tr
+          %td{:colspan => 2}
+            %h3 Description
+        %tr
+          %td{:colspan => 2}= project.description
+        %tr
+          %td{:nowrap => true, :colspan => 2}
+            %h3 Current Downloads
+        - if !project_download.nil?
+          %tr
+            %td{:nowrap => true, :valign => "top"}= project_download.updated_at.strftime("%d/%m/%y %H:%M:%S")
+            %td{:valign => "top"}
+              %a{:href => project_download.url}= project_download.title
+        - else
+          %tr
+            %td{:nowrap => true, :valign => "top", :colspan => 2}= "No downloads available"
+        %tr
+          %td{:colspan => 2}
+            %h3 Current Activity
+        - project_updates.each do |project_update|
+          %tr
+            %td{:nowrap => true, :valign => "top"}= project_update.updated_at.strftime("%d/%m/%y %H:%M:%S")
+            %td{:valign => "top"}= project_update.title

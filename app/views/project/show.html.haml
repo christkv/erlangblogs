@@ -1,1 +1,31 @@
-hello world
+%table{:width => "750px"}
+  %tr
+    %td{:valign => "top"}
+      %table{:width => "100%"}
+        %tr
+          %td
+            %h3 Project Name            
+        %tr
+          %td= @project.title
+        %tr
+          %td
+            %h3 Description
+        %tr
+          %td= @project.description
+    %td{:valign => "top"}
+      %table{:width => "100%"}
+        %tr
+          %td{:colspan => 2}
+            %h3 Current Activity
+        - @project_updates.each do |project_update|
+          %tr
+            %td{:nowrap => true, :valign => "top"}= project_update.updated_at.strftime("%d/%m/%y %H:%M:%S")
+            %td{:valign => "top"}= project_update.title
+        %tr
+          %td{:nowrap => true, :colspan => 2}
+            %h3 Current Downloads            
+        - @project_downloads.each do |project_download|
+          %tr
+            %td{:nowrap => true, :valign => "top"}= project_download.updated_at.strftime("%d/%m/%y %H:%M:%S")
+            %td{:valign => "top"}
+              %a{:href => project_download.url}= project_download.title

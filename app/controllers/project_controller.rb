@@ -2,13 +2,30 @@ class ProjectController < ApplicationController
   sortable_attributes :title
 
   def index()
-    params["order"] = "ascending"
-    #@projects = Project.paginate(:page => params[:page], :per_page => 20, :order => sort_order())
-    @projects = Project.paginate(:page => params[:page], :per_page => 30, :order => "title asc")
+    @projects = Project.paginate(:page => params[:page], :per_page => 10, :order => "title asc")
+    @most_active_projects = Project.most_active_projects(31, 5)
+    # If we have some projects let's set up the first project
+    if @most_active_projects.length > 0
+      @project = @most_active_projects.first
+      @project_updates = ProjectUpdate.find(:all, :conditions => ["project_id = ?", @project.id], :order => "updated_at desc", :limit => 3)
+      @project_download = ProjectDownload.find(:first, :conditions => ["project_id = ?", @project.id], :order => "updated_at desc")
+    end
   end
 
   def show()
-    
+    @project = Project.find(:first, :conditions => ["id = ?", params[:id]])
+    @project_update = ProjectUpdate.find(:all, :conditions => ["project_id = ?", @project.id]).paginate(:page => params[:page], :per_page => 5, :order => "updated_at desc")
+    @project_downloads = ProjectDownload.find(:all, :conditions => ["project_id = ?", @project.id]).paginate(:page => params[:page], :per_page => 5, :order => "updated_at desc")
+  end
+
+  ##
+  ##
+  ##
+  def info()
+    project= Project.find(:first, :conditions => ["id = ?", params[:id]])
+    project_updates = ProjectUpdate.find(:all, :conditions => ["project_id = ?", project.id], :order => "updated_at desc", :limit => 3)
+    project_download = ProjectDownload.find(:first, :conditions => ["project_id = ?", project.id], :order => "updated_at desc")
+    render :partial => 'project_short_info', :locals => {:project => project, :project_updates => project_updates, :project_download => project_download}
   end
 
   ##

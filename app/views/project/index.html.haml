@@ -1,22 +1,53 @@
 %table
-  %thead
-    %tr
-      %th Name
-      %th Site
-      %th Description
-      %th
-  %tbody
-    - @projects.each do |project|
-      %tr
-        %td
-          = link_to(project.title, project_show_url({:id => project.id}))
-        %td= project.site
-        %td= project.description
-        %td
-          %div{:id => "project_#{project.id}"}
-            - if !current_user.nil?
-              - !if current_user.is_following(current_user.id, project.id)
-                = render :partial => "follow", :locals => {:mode => "follow", :text => "Follow", :project_id => project.id}
-              - else
-                = render :partial => "follow", :locals => {:mode => "remove", :text => "Remove", :project_id => project.id}
-= will_paginate(@projects)
+  %tr
+    %td{:valign => "top", :width => "75%"}
+      %h2 Most Active Projects
+      %table
+        %thead
+          %tr
+            %th Name
+            %th Site
+            %th Description
+            %th
+        %tbody
+          - @most_active_projects.each do |project|
+            %tr
+              %td
+                = link_to_remote(project.title, :update => "project_description", :url => project_info_url({:id => project.id}))
+              %td= project.site
+              %td= project.description
+              %td
+                %div{:id => "project_#{project.id}"}
+                  - if !current_user.nil?
+                    - !if current_user.is_following(current_user.id, project.id)
+                      = render :partial => "follow", :locals => {:mode => "follow", :text => "Follow", :project_id => project.id}
+                    - else
+                      = render :partial => "follow", :locals => {:mode => "remove", :text => "Remove", :project_id => project.id}
+
+      %h2 All Projects
+      %table
+        %thead
+          %tr
+            %th Name
+            %th Site
+            %th Description
+            %th
+        %tbody
+          - @projects.each do |project|
+            %tr
+              %td
+                = link_to_remote(project.title, :update => "project_description", :url => project_info_url({:id => project.id}))
+              %td= project.site
+              %td= project.description
+              %td
+                %div{:id => "project_#{project.id}"}
+                  - if !current_user.nil?
+                    - !if current_user.is_following(current_user.id, project.id)
+                      = render :partial => "follow", :locals => {:mode => "follow", :text => "Follow", :project_id => project.id}
+                    - else
+                      = render :partial => "follow", :locals => {:mode => "remove", :text => "Remove", :project_id => project.id}
+      = will_paginate(@projects)
+    %td{:valign => "top", :width => "25%"}
+      #project_description
+        - if !@project.nil?
+          = render :partial => 'project_short_info', :locals => {:project => @project, :project_updates => @project_updates, :project_download => @project_download}
