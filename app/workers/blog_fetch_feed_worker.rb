@@ -14,6 +14,8 @@ class BlogFetchFeedWorker < Workling::Base
   #      t.timestamps    
   def update_feed(options)
     begin
+      # Log blog retrival
+      puts "BlogFetchFeedWorker: #{options.inspect}"
       # unpack parameters
       feed_url = options[:feed_url]
       user_id = !options[:user_id].nil? ? options[:user_id] : 0
@@ -40,7 +42,7 @@ class BlogFetchFeedWorker < Workling::Base
           md5_hash = MD5.md5("#{feed_item.title}#{feed_item.description}").to_s
           blog_entry = BlogEntry.find(:first, :conditions => ["hash_value = ?", md5_hash])
           if !blog_entry
-            content = feed_item.content
+            content = feed_item.description
             feed_item.content = ""
             blog_entry = BlogEntry.create(:blog_id => blog.id, :title => feed_item.title, :content => content, :url => feed_item.urls.join(","),
               :date_published => feed_item.date_published, :metadata => feed_item.to_yaml(), :hash_value => md5_hash)

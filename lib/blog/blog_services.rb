@@ -11,7 +11,7 @@ class BlogServices
     blog = Blog.find(:first, :conditions => ["feed_url = ?", feed_url])
     if blog.nil?
       blog = Blog.create(:user_id => user_id, :title => title, :description => description,
-        :url => url, :feed_url => url, :metadata => metadata.to_json)
+        :url => url, :feed_url => url, :metadata => metadata.to_json, :last_updated => Time.now())
     end
     # Return blog
     return blog
@@ -50,6 +50,13 @@ class BlogServices
 
   def sync_user_blog(user_id, feed_url)
     BlogFetchFeedWorker.asynch_update_feed({:user_id => user_id, :feed_url => feed_url})
+  end
+
+  def synch_user_blogs(user_id)
+    blogs = Blog.find(:all, :conditions => ["user_id = ?", user_id])
+    blogs.each {|blog|
+      BlogFetchFeedWorker.asynch_update_feed({:user_id => user_id, :feed_url => blog.feed_url})      
+    }
   end
 
   ##

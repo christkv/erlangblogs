@@ -1,12 +1,16 @@
-- @blog_entries.each do |blog_entry|
-  %div{:class => "post"}
-    %h2{:class => "title"}
-      %a{:href => "#"} = blog_entry.title
-    %p{:class => "byline"}
-      %small= "Posted on #{blog_entry.date_published}"
-    %div{:class => "entry"}
-      %h3 blog_entry.title
-      = @blog_entry.content
-      %p{:class => "links"}
-        %a{:href => @blog_entry.url, :class => "more"} &laquo;&laquo;&nbsp;&nbsp;Read More&nbsp;&nbsp;&raquo;&raquo;
-= will_paginate(@blog_entries)
+%table
+  %tr
+    %td{:width => "50%"}
+      - @blog_entries.each do |blog_entry|
+        %div{:class => "post"}
+          %h2{:class => "title"}
+            %a{:href => "#"}= blog_entry.title
+          %p{:class => "byline"}
+            %small= "Posted on #{blog_entry.date_published}"
+          %div{:class => "entry"}
+            = blog_entry.content
+            %p{:class => "links"}
+              %a{:href => blog_entry.url, :class => "more"} &laquo;&laquo;&nbsp;&nbsp;Read More&nbsp;&nbsp;&raquo;&raquo;
+      = will_paginate(@blog_entries)
+    %td{:width => "50%"}
+      = "Hello world"

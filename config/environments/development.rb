@@ -15,3 +15,7 @@ config.action_controller.perform_caching             = false
 
 # Don't care if the mailer can't send
 config.action_mailer.raise_delivery_errors = false
+
+# SLIDESHARE
+SLIDESHARE_API_KEY = "FYJPY6bv"
+SLIDESHARES_SECRET = "5WBktthy"
