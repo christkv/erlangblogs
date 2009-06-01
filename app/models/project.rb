@@ -17,6 +17,6 @@ class Project < ActiveRecord::Base
     # Negate the number to create the timeframe
     number_of_days = number_of_days * -1
     # Figure out the most active projects by calculating the amount of commits over the last 30 days
-    return self.find_by_sql(["select p.id, p.title, p.site, p.description, count(*) from projects p, project_updates pu where pu.updated_at <= now() and pu.updated_at >= adddate(now(), ?) and p.id = pu.project_id group by p.id order by count(*) desc limit ?", number_of_days, limit])
+    return self.find_by_sql(["select p.id, p.title, p.site, p.description, count(*) as activity_level from projects p, project_updates pu where pu.updated_at <= now() and pu.updated_at >= adddate(now(), ?) and p.id = pu.project_id group by p.id order by count(*) desc limit ?", number_of_days, limit])
   end
 end

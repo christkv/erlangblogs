@@ -17,5 +17,5 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :facebook, :collection => {:link_user_accounts => :get}
   
-  map.root :controller => "home"
+  map.root :controller => "home", :action => "index"
 end

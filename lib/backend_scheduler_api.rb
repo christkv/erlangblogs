@@ -2,7 +2,7 @@ require 'rubygems'
 gem 'rufus-scheduler'
 require 'rufus/scheduler'
 
-class BackendSchedulerService
+class BackendSchedulerApi
   attr_accessor :tasks
   attr_accessor :scheduler
   # Scheduler job variables
@@ -12,7 +12,7 @@ class BackendSchedulerService
   ##
   ##  Initialize the system to correctly use logs etc
   ##
-  def initialize
+  def initialize(testing_frequency = "60m")
     # Set up the tasks
     @job_ids_by_task = {}
     @tasks_by_job_ids = {}
@@ -21,8 +21,9 @@ class BackendSchedulerService
     # Create a logger
     @logger = Logger.new( 'scheduler.log', 'monthly' )
     @task_test_results_logger = Logger.new( 'task_test_results.log', 'monthly' )
+    puts "Schedule tests"
     # Add the test runninng scheduler method
-    @scheduler.every("60m") do
+    @scheduler.every(testing_frequency) do
       test_results = execute_task_tests()
       test_results.each {|test_result|
         # the test is not nil then we have an error (print this error to the log)
@@ -94,8 +95,22 @@ class BackendSchedulerService
   def execute_task_tests
     # Run all tasks tests (ensuring we capture any changes in the sites we are monitoring)
     test_results = @tasks_by_job_ids.values.map {|task|
+      puts "- Running test for task: #{task.class.name}"      
       if task.respond_to?(:test)
-        task.test()
+        begin
+          result = task.test()
+          if result.kind_of?(Array) && result.length > 0
+            # Log the error for the result
+            @task_test_results_logger.error("FAILURE:#{result.inspect}")
+            # Send an email with the failure information
+            Notifier.deliver_crawler_error("christkv@gmail.com", task.class.name, result)
+          end
+        rescue Exception => e
+          # Log the error for the result
+          @task_test_results_logger.error("ERROR:#{e.backtrace}")
+          # Send an email with the failure information
+          Notifier.deliver_crawler_error("christkv@gmail.com", task.class.name, [e.backtrace.inspect])
+        end
       end
     }
     # return the test results

@@ -1,14 +1,43 @@
-= render :partial => "facebook_friends"
-- if @fb_friends
-  %table
-    %tr
-      %th=""
-      %th="First name"
-      %th="Last name"
-    - @fb_friends.each do |friend|
-      %tr
-        %td
-          %img{:src => friend.pic_square}
-        %td= friend.first_name
-        %td= friend.last_name
-
+%table
+  %tr
+    %td{:width => "50%", :valign => "top"}
+      - @blog_entries.each do |blog_entry|
+        %div{:class => "post"}
+          %h2{:class => "title"}
+            %a{:href => "#"}= blog_entry.title
+          %p{:class => "byline"}
+            %small= "Posted on #{blog_entry.date_published}"
+          %div{:class => "entry"}
+            = blog_entry.content
+            %p{:class => "links"}
+              %a{:href => blog_entry.url, :class => "more"} &laquo;&laquo;&nbsp;&nbsp;Read More&nbsp;&nbsp;&raquo;&raquo;
+      = will_paginate(@blog_entries)
+    %td{:width => "50%", :valign => "top"}
+      %h2 Most Active Projects
+      %table
+        %thead
+          %tr
+            %th Name
+            %th Site
+            %th Activity
+            %th
+        %tbody
+          - @most_active_projects.each do |project|
+            %tr
+              %td
+                = link_to_remote(project.title, :update => "project_description", :url => project_info_url({:id => project.id}))
+              %td= project.site
+              %td{:align => "center"}= project.activity_level
+              %td
+                %div{:id => "project_#{project.id}"}
+                  - if !current_user.nil?
+                    - !if current_user.is_following(current_user.id, project.id)
+                      = render :partial => "follow", :locals => {:mode => "follow", :text => "Follow", :project_id => project.id}
+                    - else
+                      = render :partial => "follow", :locals => {:mode => "remove", :text => "Remove", :project_id => project.id}
+          %tr
+            %td{:align => "right", :colspan => 4}
+              = link_to "Explore All projects", project_url()
+      %h2 Latest Users
+      %table
+        

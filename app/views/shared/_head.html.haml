@@ -8,7 +8,8 @@
   #menu
     %ul{:id => "main"}
       %li{:class => "current_page_items"}
-        %a{:href => "#"} Homepage
+        %a{:href => "#"}
+          = link_to "Homepage", :controller => "home", :action => "index"
       %li
         %a{:href => "#"}
           = link_to "Blogs", :controller => "blog", :action => "index"

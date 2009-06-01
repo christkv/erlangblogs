@@ -1,4 +1,4 @@
-require 'projects/google/google_code'
+require 'projects/google/google_code_api'
 
 class ProjectsFetchWorker < Workling::Base
 

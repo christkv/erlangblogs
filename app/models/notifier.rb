@@ -24,4 +24,12 @@ class Notifier < ActionMailer::Base
     sent_on       Time.now
     body          :root_url => root_url
   end
+
+  def crawler_error(email, class_name, errors)
+    subject       "Activation Complete"
+    from          "Erlangblogs Notifier <noreply@erlangblogs.com>"
+    recipients    email
+    sent_on       Time.now
+    body          :errors => errors, :class_name => class_name    
+  end
 end

@@ -3,7 +3,7 @@ require 'cgi'
 require 'open-uri'
 require 'nokogiri'
 
-class SlideShare
+class SlideShareApi
   @@API_URL = "http://www.slideshare.net/api/2"
 
   def initialize(api_key, api_secret)

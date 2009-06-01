@@ -14,5 +14,10 @@ class HomeController < ApplicationController
       #@fb_user = Facebooker::User.new('848740108')
       #@fb_friends = @fb_user.friends!()
     end
+
+    # Add the blog entries to be displayed
+    @blog_entries = BlogEntry.paginate(:page => params[:page], :per_page => 20, :order => "date_published asc")
+    # Set up the projects we want to show (dependent on the activity level)
+    @most_active_projects = Project.most_active_projects(31, 5)    
   end
 end
