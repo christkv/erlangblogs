@@ -55,7 +55,7 @@ class GoogleCodeApi
       #end
       # Pull the associated information
       #parse_project(project, name_div.search("a/@href"))
-      results << {:site => site, :url => project_url, :title => project_name, :description => project_description, :hash_value => md5_hash}
+      results << {:site => site, :url => project_url, :title => project_name, :description => project_description, :hash_value => md5_hash, :metadata => {}}
     }
     # Return all the results found
     return results
@@ -68,6 +68,8 @@ class GoogleCodeApi
     project_update_feed = SimpleRSS.parse open(project_update_url)
     # fetch the downloads
     downloads_feed = SimpleRSS.parse open(downloads_url)
+    # all the values for the project
+    project = {:downloads => [], :updates => []}
     # Process all the download items
     downloads_feed.items.each {|item|
       #puts item.methods.sort
@@ -81,6 +83,7 @@ class GoogleCodeApi
       #if !project_download
       #  ProjectDownload.create(:project_id => project.id, :updated_at => updated_at, :author => author, :title => title, :url => download_link, :hash_value => md5_hash)
       #end
+      project[:downloads] << {:author => author, :updated_at => updated_at, :title => title, :download_link => download_link, :hash_value => md5_hash}
     }
     # Process all the project update items
     project_update_feed.items.each {|item|
@@ -95,7 +98,10 @@ class GoogleCodeApi
       #if !project_update
       #  ProjectUpdate.create(:project_id => project.id, :updated_at => updated_at, :author => author, :title => title, :url => download_link, :hash_value => md5_hash)
       #end
+      project[:updates] << {:author => author, :updated_at => updated_at, :title => title, :download_link => download_link, :hash_value => md5_hash, :version => nil}
     }
+    # Return the project
+    return project
   end
 end
 

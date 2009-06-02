@@ -21,9 +21,9 @@ class SchedulerService
     github_task = Github.new(@hash_values[:search_tag])
     # Register all the tasks
     #@backend_scheduler_api.add_task(slide_share_task, "60s")
-    @backend_scheduler_api.add_task(google_code_task, "60s")
+    #@backend_scheduler_api.add_task(google_code_task, "60s")
     #@backend_scheduler_api.add_task(sourceforge_task, "60s")
-    #@backend_scheduler_api.add_task(github_task, "60s")
+    @backend_scheduler_api.add_task(github_task, "60s")
   end
   
   def join()
